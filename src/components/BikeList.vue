@@ -1,6 +1,6 @@
 <template>
   <select v-model="selected">
-    <option disabled value="">Please select district</option>
+    <option disabled value="">{{ msg }}</option>
     <option>大安區</option>
     <option>中正區</option>
     <option>松山區</option>
@@ -36,28 +36,51 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
+  data: function () {
+    return {
+      bikeArr: [],
+      selected: "",
+    };
+  },
   name: "BikeList",
   props: {
     msg: String,
+  },
+  mounted: async function () {
+    try {
+      const res = await axios(
+        "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json"
+      );
+      // .then((res) => {
+      this.bikeArr = res.data;
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+
+    // });
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+tr:nth-child(even) {
+  background-color: #dddddd;
 }
 </style>
