@@ -6,9 +6,9 @@
 <script>
 import BikeList from "@/components/BikeList.vue";
 export default {
-  name: "BikeView",
   components: {
     BikeList,
   },
+  methods: {},
 };
 </script>

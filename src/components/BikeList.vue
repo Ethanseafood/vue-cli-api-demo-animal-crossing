@@ -38,13 +38,13 @@
 <script>
 import axios from "axios";
 export default {
-  data: function () {
+  data() {
     return {
       bikeArr: [],
       selected: "",
+      exampleMsg: "Hello emit",
     };
   },
-  name: "BikeList",
   props: {
     msg: String,
   },

@@ -1,27 +1,23 @@
 <template>
-  <div v-for="item in imgArr" :key="item.id">
-    <img :src="item.image_uri" alt="" />
-  </div>
+  {{ num }}
+  <FishList @addNum="callBack" />
 </template>
 
 <script>
-import axios from "axios";
+import FishList from "@/components/FishList.vue";
 export default {
-  data: function () {
+  data() {
     return {
-      imgArr: [],
+      num: 0,
     };
   },
-  mounted: async function () {
-    try {
-      const res = await axios("http://acnhapi.com/v1/fish/");
-      // .then((res) => {
-      this.imgArr = res.data;
-      console.log(res);
-      // });
-    } catch (err) {
-      console.log(err);
-    }
+  components: {
+    FishList,
+  },
+  methods: {
+    callBack(n) {
+      this.num += n.y;
+    },
   },
 };
 </script>
